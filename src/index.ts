@@ -1,8 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import { UserController } from './controller/UserController'
-import { AccountController } from './controller/AccountController'
 import { userRoutes } from './routes/userRouter'
+import { accountRoutes } from './routes/accountRouter'
 
 const app = express()
 
@@ -13,11 +12,7 @@ app.listen(3003, () => {
     console.log(`Servidor rodando na porta ${3003}`)
 })
 
-const accountController = new AccountController()
 
 app.use("/users", userRoutes)
 
-app.get("/accounts", accountController.getAccounts)
-app.get("/accounts/:id/balance", accountController.getAccountBalance)
-app.post("/accounts", accountController.createAccount)
-app.put("/accounts/:id/balance", accountController.editAccountBalance)
+app.use("/accounts", accountRoutes)
